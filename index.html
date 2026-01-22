@@ -2018,86 +2018,74 @@
 
     <!-- DOWNLOAD MODAL START -->
     <div class="download-modal" id="downloadModal">
-    <div class="download-modal-overlay"></div>
-    <div class="download-modal-content">
+      <div class="download-modal-overlay"></div>
+      <div class="download-modal-content">
         <button class="download-modal-close" aria-label="Fechar modal">
-            <i class="flaticon-close"></i>
+          <i class="flaticon-close"></i>
         </button>
         
         <div class="download-modal-header">
-            <h2 class="download-modal-title">Agende seu Horário</h2>
-            <p class="download-modal-subtitle">
-                Preencha seus dados abaixo para iniciar o atendimento via WhatsApp com nossa equipe.
-            </p>
+          <h2 class="download-modal-title">Agende seu Horário</h2>
+          <p class="download-modal-subtitle">
+            Preencha seus dados abaixo para iniciar o atendimento via WhatsApp com nossa equipe.
+          </p>
         </div>
 
         <form class="download-modal-form" id="downloadForm">
-            <div class="download-modal-field">
-                <label for="downloadName">Nome do Tutor</label>
-                <input
-                    type="text"
-                    id="downloadName"
-                    name="name"
-                    required
-                    placeholder="Seu nome completo"
-                />
-            </div>
-            
-            <div class="download-modal-field">
-                <label for="downloadPetName">Nome do Pet (Opcional)</label>
-                <input
-                    type="text"
-                    id="downloadPetName"
-                    name="petname"
-                    placeholder="Nome do seu animalzinho"
-                />
-            </div>
+          <div class="download-modal-field">
+            <label for="downloadName">Nome do Tutor</label>
+            <input
+              type="text"
+              id="downloadName"
+              name="name"
+              required
+              placeholder="Seu nome completo"
+            />
+          </div>
+          
+          <div class="download-modal-field">
+            <label for="downloadPetName">Nome do Pet (Opcional)</label>
+            <input
+              type="text"
+              id="downloadPetName"
+              name="petname"
+              placeholder="Nome do seu animalzinho"
+            />
+          </div>
+          
+          <div class="download-modal-field">
+            <label for="downloadWhatsapp">Seu WhatsApp</label>
+            <input
+              type="tel"
+              id="downloadWhatsapp"
+              name="whatsapp"
+              required
+              placeholder="(98) 99999-9999"
+            />
+          </div>
 
-            <a 
-                class="download-modal-submit" 
-                href="#" 
-                id="btnEnviarWhatsapp"
-                style="text-align: center; justify-content: center;"
-            >
-                SOLICITAR AGENDAMENTO <i class="flaticon-arrow-up-right"></i>
-            </a>
+          <button 
+            type="submit" 
+            class="download-modal-submit"
+            style="
+              width: 100%;
+              border: none;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              font-size: 16px;
+              font-weight: 700;
+            "
+          >
+            SOLICITAR AGENDAMENTO <i class="flaticon-arrow-up-right"></i>
+          </button>
         </form>
+      </div>
     </div>
-</div>
 
-<script>
-    document.getElementById('btnEnviarWhatsapp').addEventListener('click', function(e) {
-        e.preventDefault(); // Impede o link de abrir vazio
 
-        // 1. Pega os valores dos campos
-        var nome = document.getElementById('downloadName').value;
-        var pet = document.getElementById('downloadPetName').value;
-        var wppCliente = document.getElementById('downloadWhatsapp').value;
-
-        // Validação simples: se não tiver nome, alerta
-        if(nome === "") {
-            alert("Por favor, preencha seu nome.");
-            return;
-        }
-
-        // 2. Monta a mensagem (pula linha com %0A)
-        var mensagem = "Olá! Vim pelo site da Clínica e gostaria de agendar um serviço. 🐾";
-        mensagem += "%0A%0A*Meus Dados:*";
-        mensagem += "%0A👤 *Nome:* " + nome;
-        if(pet !== "") {
-            mensagem += "%0A🐶 *Pet:* " + pet;
-        }
-        mensagem += "%0A📱 *Meu Contato:* " + wppCliente;
-        mensagem += "%0A%0AGostaria de saber os horários disponíveis.";
-
-        // 3. Número de destino (Coloque o número da clínica aqui)
-        var numeroDestino = "5598981659576"; 
-
-        // 4. Cria o link final e abre
-        var linkFinal = "https://wa.me/" + numeroDestino + "?text=" + mensagem;
-        window.open(linkFinal, '_blank');
-    });
-</script>
     <!-- DOWNLOAD MODAL END -->
 
     <!-- libraries JS -->
@@ -2335,38 +2323,39 @@
           });
         }
 
-        // Form submission
+        // Form submission - CORRIGIDO E DEFINITIVO
         if (downloadForm) {
           downloadForm.addEventListener("submit", function (e) {
             e.preventDefault(); // Impede a página de recarregar
 
-            // 1. Pega os dados dos campos
-            const formData = new FormData(downloadForm);
-            const name = formData.get("name");
-            const email = formData.get("email");
-            const whatsapp = formData.get("whatsapp");
+            // 1. Pega os valores que a pessoa digitou
+            const name = document.getElementById("downloadName").value;
+            // Tenta pegar o pet, se o campo não existir (versão antiga), deixa vazio
+            const petInput = document.getElementById("downloadPetName");
+            const pet = petInput ? petInput.value : "";
+            const whatsapp = document.getElementById("downloadWhatsapp").value;
 
-            // 2. Número do WhatsApp da Clínica (somente números)
-            const phoneDestino = "5598981659576"; 
+            // 2. Número da clínica (apenas números)
+            const numeroDestino = "5598981659576"; 
 
-            // 3. Monta a mensagem bonitinha (o \n quebra a linha)
-            let message = `Olá! Vim pelo site da Medneeds Pet. 🐾`;
-            message += `\n\n*Gostaria de solicitar acesso/agendamento.*`;
-            message += `\n\n*Meus Dados:*`;
-            message += `\n👤 *Nome:* ${name}`;
-            message += `\n📧 *Email:* ${email}`;
-            message += `\n📱 *WhatsApp:* ${whatsapp}`;
+            // 3. Cria a mensagem
+            let texto = `Olá! Vim pelo site da Medneeds Pet. 🐾\n`;
+            texto += `Gostaria de solicitar um agendamento.\n\n`;
+            texto += `*Meus Dados:*\n`;
+            texto += `👤 *Nome:* ${name}\n`;
+            if(pet) texto += `🐶 *Pet:* ${pet}\n`;
+            texto += `📱 *WhatsApp:* ${whatsapp}`;
 
-            // 4. Cria o link oficial do WhatsApp
-            const whatsappUrl = `https://wa.me/${phoneDestino}?text=${encodeURIComponent(message)}`;
+            // 4. Codifica e Abre o WhatsApp
+            const linkWhatsapp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(texto)}`;
+            window.open(linkWhatsapp, '_blank');
 
-            // 5. Abre o WhatsApp em uma nova aba
-            window.open(whatsappUrl, '_blank');
-
-            // 6. Fecha o modal
+            // 5. Fecha e limpa
             closeModal();
+            downloadForm.reset();
           });
         }
+        
       })();
     </script>
 
