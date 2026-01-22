@@ -402,7 +402,7 @@
   white-space: nowrap;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease,
     color 0.25s ease;
-  z-index: 1.5;
+  z-index: 1;
   animation: problem-float-y 4.5s ease-in-out infinite;
 }
 
@@ -895,7 +895,7 @@
 /* Ajusta o footer inteiro */
 .ul-footer-widget {
     text-align: left !important;
-    margin-left: 40px !important;
+    margin-bottom: 16px;
 }
 
 /* Ajusta títulos */
@@ -927,6 +927,7 @@
   display: flex;
   align-items: center;
   gap: 16px; /* espaço entre eles */
+  margin-top: 16px;
 }
 
 /* Caixa padrão */
@@ -977,4 +978,5 @@
   padding-left: 0;    /* garante que não empurre */
   margin-left: 0;     /* remove deslocamentos */
 }
+
 
