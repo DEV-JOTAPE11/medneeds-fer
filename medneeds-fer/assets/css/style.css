@@ -46,14 +46,14 @@ CSS INDEX
 :root {
   --black: #000;
   --white: #fff;
-  --ul-primary: #0b193e;
+  --ul-primary: #012c06;
   --ul-secondary: #caf55f;
   --ul-c3: #dbe9a1;
   --ul-black: #0f0d1d;
   --ul-gray: #f2f2f2;
   --ul-gray2: #5d6063;
   --ul-gray3: #888a8d;
-  --ul-gradient: linear-gradient(90deg, #213c84 0%, var(--ul-primary) 100%);
+  --ul-gradient: linear-gradient(90deg, #159b1c 0%, var(--ul-primary) 100%);
   --font-primary: "Open Sans", sans-serif;
   --font-lato: "Lato", sans-serif;
 }

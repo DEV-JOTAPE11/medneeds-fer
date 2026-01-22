@@ -372,7 +372,7 @@
 
 .problem-float {
   position: absolute;
-  background: #0b193e;
+  background: #f07c00;
   color: #fff;
   border: 1px solid rgba(202, 245, 95, 0.25);
   box-shadow: 0 8px 24px rgba(11, 25, 62, 0.12);
@@ -402,7 +402,7 @@
   white-space: nowrap;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease,
     color 0.25s ease;
-  z-index: 2;
+  z-index: 1.5;
   animation: problem-float-y 4.5s ease-in-out infinite;
 }
 
